@@ -2,7 +2,7 @@
 	"name": "@turystack/modeling",
 	"description": "Data modelling skill — what becomes a table, how tables relate, how every row is scoped to a customer, how a model evolves once it has rows, and the library of canonical models the CLI generates: IAM first. Installed into .claude/skills and/or .codex/skills via the turystack CLI.",
 	"private": false,
-	"version": "0.9.0",
+	"version": "0.9.1",
 	"packageManager": "pnpm@10.12.3",
 	"sideEffects": false,
 	"publishConfig": {
