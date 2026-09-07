@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches-ignore:
+      - main
+  pull_request:
+  # Called by publish.yml, so nothing reaches npm without this passing.
+  workflow_call:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      # A skill is markdown, and markdown fails quietly: a separator row one
+      # column short drops cells when it renders, so a law disappears from the
+      # page while staying in the file. That is the worst outcome for a document
+      # whose only job is to be read, and nothing here used to catch it.
+      #
+      # This checks what a skill can prove on its own — its frontmatter, its
+      # tables, its ids, and that every law names a gate. Cross-skill citations
+      # and gate coverage need every skill at once and live in the monorepo's
+      # `scripts/validate-skills.mjs`.
+      - name: The skill is well formed
+        run: npx --yes @turystack/proof-mode-gates skill .
